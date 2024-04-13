@@ -1,0 +1,5 @@
+#include<stdio.h>
+int main(){
+      int i,a[20],n,t;
+      printf("enter the size of an array:");
+      scanf("%d",&n);
