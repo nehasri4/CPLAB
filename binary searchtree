@@ -1,0 +1,90 @@
+/*implumenting binary search tree*/
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int data;
+	struct node *lchild;
+	struct node *rchild;
+};
+typedef struct node NODE;
+NODE* insert(NODE*,int);
+void inorder(NODE*);
+void preorder(NODE*);
+void postorder(NODE*);
+int count_node(NODE*);
+int main(){
+	int choice,key,root;
+	while(1){
+		printf("\n MENU \n");
+		printf("1.insert \n 2.inorder \n 3.preorder \n 4.postorder \n 5.count \n 6.exit\n ");
+		printf("enter your choice\n");
+		scanf("%d",&choice);
+		switch(choice){
+			case 1:printf("enter the key to be inserted\n");
+			       scanf("%d",&key);
+			       root=insert(key,root);
+			       break;
+			case 2:printf("inorder:\n");
+			       scanf("%d",&key);
+			       inorder();
+			       break;
+			case 3:printf("preorder:\n");
+			       scanf("%d",&key);
+			       preorder();
+			       break;
+			case 4:printf("postorder:\n");
+			       scanf("%d",&key);			       
+			       postorder();
+			       break;
+			case 5:printf("number of nodes in tree:\n");
+			       count_node();
+			       break;
+			case 6:exit(0);
+			       break;
+			default:printf("invalid choice\n");
+		}			
+			 
+	}
+}
+NODE* insert(NODE* root,int element){
+	if(root=NULL){
+		root=(NODE*)malloc(sizeof(NODE));
+		root->data=element;
+		root->lchild=NULL;
+		root->rchild=NULL;
+	}
+	else if (element<root->data){
+		root->lchild=insert(root->lchild,element);
+	}
+	else
+		root->rchild=insert(root->rchild,element);
+	return root;
+}
+void inorder(NODE* root){
+	if(root!= NULL){
+		inorder(root->lchild);
+		inorder(root->lchild);
+		printf("%d",root->data);
+		inorder(root->rchild);
+	}
+}
+void preorder(NODE* root){
+	if(root!=NULL){
+		printf("%d",root->data);
+		preorder(root->lchild);
+		preorder(root->rchild);
+	}
+}
+void postorder(NODE* root){
+	if(root!=NULL){
+		postorder(root->lchild);
+		postorder(root->rchild);
+		printf("%d",root->data);
+	}
+}
+int count_node(NODE* root){
+	if(root==NULL){
+		return 0;
+	}
+	return 1 + count_node(root->lchild)+count_node(root->rchild);
+}
